@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 
 import { CustomerModule } from './customer/customer.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Customer } from './customer/entities/customer.entity';
 
 @Module({
   imports: [
@@ -13,7 +14,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: 'shijin',
       password: 'shijin123',
       database: 'mydatabase',
-      entities: [],
+      entities: [Customer],
       synchronize: true,
     }),
   ],
