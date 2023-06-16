@@ -21,7 +21,7 @@ export class CustomerService {
       await this.UserRepository.save(customer);
       return customer;
     } catch (error) {
-      throw new NotAcceptableException(error.message);
+      throw new BadRequestException(error.message);
     }
   }
 
@@ -29,7 +29,7 @@ export class CustomerService {
     try {
       return this.UserRepository.find();
     } catch (error) {
-      throw new NotAcceptableException(error.message);
+      throw new BadRequestException(error.message);
     }
   }
 
@@ -37,14 +37,13 @@ export class CustomerService {
     try {
       return this.UserRepository.findOneBy({ id });
     } catch (error) {
-      throw new NotAcceptableException(error.message);
+      throw new BadRequestException(error.message);
     }
   }
 
   async update(id: number, updateCustomerDto: UpdateCustomerDto) {
     try {
       const updateCustomer = await this.UserRepository.findOneBy({ id });
-      console.log(updateCustomer);
       if (!updateCustomer) {
         throw new NotFoundException('Customer not found');
       }
