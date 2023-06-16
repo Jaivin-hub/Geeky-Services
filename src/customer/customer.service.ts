@@ -1,25 +1,66 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotAcceptableException,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateCustomerDto } from './dto/create-customer.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Customer } from './entities/customer.entity';
+import { Repository } from 'typeorm';
+import { UpdateCustomerDto } from './dto/update-customer.dto';
 
 @Injectable()
 export class CustomerService {
-  create(createCustomerDto: CreateCustomerDto) {
-    return 'This action adds a new customer';
+  constructor(
+    @InjectRepository(Customer) private UserRepository: Repository<Customer>,
+  ) {}
+  async create(createCustomerDto: CreateCustomerDto) {
+    try {
+      const customer = this.UserRepository.create(createCustomerDto);
+      await this.UserRepository.save(customer);
+      return customer;
+    } catch (error) {
+      throw new NotAcceptableException(error.message);
+    }
   }
 
   findAll() {
-    return `This action returns all customer`;
+    try {
+      return this.UserRepository.find();
+    } catch (error) {
+      throw new NotAcceptableException(error.message);
+    }
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} customer`;
+    try {
+      return this.UserRepository.findOneBy({ id });
+    } catch (error) {
+      throw new NotAcceptableException(error.message);
+    }
   }
 
-  update(id: number, updateCustomerDto) {
-    return `This action updates a #${id} customer`;
+  async update(id: number, updateCustomerDto: UpdateCustomerDto) {
+    try {
+      const updateCustomer = await this.UserRepository.findOneBy({ id });
+      console.log(updateCustomer);
+      if (!updateCustomer) {
+        throw new NotFoundException('Customer not found');
+      }
+      await this.UserRepository.update(id, updateCustomerDto);
+      return this.UserRepository.findOneBy({ id });
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} customer`;
+  async remove(id: number) {
+    try {
+      await this.UserRepository.delete(id);
+      return 'Record deleted successfully';
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
 }
