@@ -13,21 +13,22 @@ import { UpdateCustomerDto } from './dto/update-customer.dto';
 @Injectable()
 export class CustomerService {
   constructor(
-    @InjectRepository(Customer) private UserRepository: Repository<Customer>,
+    @InjectRepository(Customer) private customerModel: Repository<Customer>,
   ) {}
   async create(createCustomerDto: CreateCustomerDto) {
     try {
-      const customer = this.UserRepository.create(createCustomerDto);
-      await this.UserRepository.save(customer);
+      const customer = this.customerModel.create(createCustomerDto);
+      await this.customerModel.save(customer);
       return customer;
     } catch (error) {
       throw new BadRequestException(error.message);
     }
   }
 
-  findAll() {
+  async findAll() {
     try {
-      return this.UserRepository.find();
+      const customerList = await this.customerModel.find();
+      return { status: 200, allData: customerList, total: customerList.length };
     } catch (error) {
       throw new BadRequestException(error.message);
     }
@@ -35,7 +36,7 @@ export class CustomerService {
 
   findOne(id: number) {
     try {
-      return this.UserRepository.findOneBy({ id });
+      return this.customerModel.findOneBy({ id });
     } catch (error) {
       throw new BadRequestException(error.message);
     }
@@ -43,12 +44,12 @@ export class CustomerService {
 
   async update(id: number, updateCustomerDto: UpdateCustomerDto) {
     try {
-      const updateCustomer = await this.UserRepository.findOneBy({ id });
+      const updateCustomer = await this.customerModel.findOneBy({ id });
       if (!updateCustomer) {
         throw new NotFoundException('Customer not found');
       }
-      await this.UserRepository.update(id, updateCustomerDto);
-      return this.UserRepository.findOneBy({ id });
+      await this.customerModel.update(id, updateCustomerDto);
+      return this.customerModel.findOneBy({ id });
     } catch (error) {
       throw new BadRequestException(error.message);
     }
@@ -56,7 +57,7 @@ export class CustomerService {
 
   async remove(id: number) {
     try {
-      await this.UserRepository.delete(id);
+      await this.customerModel.delete(id);
       return 'Record deleted successfully';
     } catch (error) {
       throw new BadRequestException(error.message);

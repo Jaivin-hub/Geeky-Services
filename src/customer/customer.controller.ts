@@ -25,13 +25,8 @@ export class CustomerController {
   }
 
   @Get()
-  async findAll() {
-    try {
-      const customerList = await this.customerService.findAll();
-      return { status: 200, allData: customerList, total: customerList.length };
-    } catch (error) {
-      throw new BadRequestException(error.message);
-    }
+  findAll() {
+    return this.customerService.findAll();
   }
 
   @Get(':id')
