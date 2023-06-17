@@ -6,7 +6,7 @@ export class Customer {
   id: number;
 
   @Column()
-  fullname: string;
+  fullName: string;
 
   @Column()
   email: string;
@@ -18,10 +18,25 @@ export class Customer {
   address: string;
 
   @Column({ nullable: true })
-  city: string;
+  role: string;
 
   @Column({ nullable: true })
-  state: string;
+  company: string;
+
+  @Column({ nullable: true })
+  country: string;
+
+  @Column({ nullable: true })
+  status: string;
+
+  @Column({ nullable: true })
+  profile_image: string;
+
+  @Column({ nullable: true })
+  avatar: string;
+
+  @Column({ nullable: true })
+  username: string;
 
   @Column()
   password: string;

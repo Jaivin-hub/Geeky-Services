@@ -6,9 +6,14 @@ import {
   Patch,
   Param,
   Delete,
+  UseInterceptors,
+  UploadedFile,
+  ParseFilePipe,
+  BadRequestException,
 } from '@nestjs/common';
 import { CustomerService } from './customer.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('customer')
 export class CustomerController {
@@ -20,8 +25,13 @@ export class CustomerController {
   }
 
   @Get()
-  findAll() {
-    return this.customerService.findAll();
+  async findAll() {
+    try {
+      const customerList = await this.customerService.findAll();
+      return { status: 200, allData: customerList, total: customerList.length };
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
 
   @Get(':id')
@@ -30,7 +40,12 @@ export class CustomerController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCustomerDto) {
+  @UseInterceptors(FileInterceptor('profile_image'))
+  update(
+    @Param('id') id: string,
+    @Body() updateCustomerDto,
+    @UploadedFile() profile: Express.Multer.File,
+  ) {
     return this.customerService.update(+id, updateCustomerDto);
   }
 
