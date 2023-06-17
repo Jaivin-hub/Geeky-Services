@@ -12,7 +12,7 @@ export class Customer {
   email: string;
 
   @Column()
-  phone: string;
+  contact: string;
 
   @Column({ nullable: true })
   address: string;
