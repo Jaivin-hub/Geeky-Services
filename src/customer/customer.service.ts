@@ -30,10 +30,12 @@ export class CustomerService {
       const customerList = await this.customerModel.find();
       return {
         status: 200,
-        allData: customerList,
-        total: customerList.length,
-        params: { currentPlan: '', q: '', role: '', status: '' },
-        users: customerList,
+        data: {
+          allData: customerList,
+          total: customerList.length,
+          params: { currentPlan: '', q: '', role: '', status: '' },
+          users: customerList,
+        },
       };
     } catch (error) {
       throw new BadRequestException(error.message);
