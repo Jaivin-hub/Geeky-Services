@@ -28,7 +28,12 @@ export class CustomerService {
   async findAll() {
     try {
       const customerList = await this.customerModel.find();
-      return { status: 200, allData: customerList, total: customerList.length };
+      return {
+        status: 200,
+        allData: customerList,
+        total: customerList.length,
+        users: customerList,
+      };
     } catch (error) {
       throw new BadRequestException(error.message);
     }
