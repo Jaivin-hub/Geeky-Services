@@ -35,6 +35,12 @@ export class Customer {
   @Column({ default: '' })
   avatar: string;
 
+  @Column({ default: '' })
+  state: string;
+
+  @Column({ default: '' })
+  city: string;
+
   @Column({ nullable: true })
   username: string;
 
