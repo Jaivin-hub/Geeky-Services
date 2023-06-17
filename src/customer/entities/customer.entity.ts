@@ -6,7 +6,7 @@ export class Customer {
   id: number;
 
   @Column()
-  name: string;
+  fullname: string;
 
   @Column()
   email: string;
