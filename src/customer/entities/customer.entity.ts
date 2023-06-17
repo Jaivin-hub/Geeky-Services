@@ -32,7 +32,7 @@ export class Customer {
   @Column({ nullable: true })
   profile_image: string;
 
-  @Column({ nullable: true })
+  @Column({ default: '' })
   avatar: string;
 
   @Column({ nullable: true })
