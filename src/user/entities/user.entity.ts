@@ -15,20 +15,38 @@ export class User {
   contact: string;
 
   @Column()
-  status: Boolean;
-
-  @Column()
-  profession: string;
+  password: string;
 
   @Column()
   role: string;
 
-  @Column({ nullable: true })
+  @Column({ default: 'active' })
+  status: string;
+
+  @Column({ default: null })
+  profession: string;
+
+  @Column({ default: null })
+  avatar: string;
+
+  @Column({ default: null })
+  avatarColor: string;
+
+  @Column({ default: null })
+  company: string;
+
+  @Column({ default: null })
+  country: string;
+
+  @Column({ default: null })
+  city: string;
+
+  @Column({ default: null })
+  state: string;
+
+  @Column({ default: null })
   address: string;
 
-  @Column()
-  password: string;
-
-  @Column({ nullable: true })
+  @Column({ default: null })
   postalCode: number;
 }
