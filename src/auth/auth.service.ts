@@ -36,7 +36,7 @@ export class AuthService {
         validUser.password,
       );
       if (isMatch) {
-        const payload = { sub: validUser.id, username: validUser.fullname };
+        const payload = { sub: validUser.id, username: validUser.fullName };
         const accessToken = await this.jwtService.signAsync(payload);
         return {
           status: 200,

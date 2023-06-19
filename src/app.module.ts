@@ -12,7 +12,7 @@ import { User } from './user/entities/user.entity';
 
 @Module({
   imports: [
-    // CustomerModule,
+    CustomerModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'sql12.freesqldatabase.com',
@@ -20,7 +20,7 @@ import { User } from './user/entities/user.entity';
       username: 'sql12626876',
       password: 'ltQF8taPKq',
       database: 'sql12626876',
-      entities: [User],
+      entities: [User, Customer],
       synchronize: true,
     }),
     AuthModule,
