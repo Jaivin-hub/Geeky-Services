@@ -7,6 +7,8 @@ import { ProductsModule } from './products/products.module';
 import { UserModule } from './user/user.module';
 import { OrderModule } from './order/order.module';
 import { ServiceModule } from './service/service.module';
+import { AuthModule } from './auth/auth.module';
+import { User } from './user/entities/user.entity';
 
 @Module({
   imports: [
@@ -18,13 +20,14 @@ import { ServiceModule } from './service/service.module';
       username: 'sql12626876',
       password: 'ltQF8taPKq',
       database: 'sql12626876',
-      entities: [Customer],
+      entities: [User, Customer],
       synchronize: true,
     }),
-    ProductsModule,
+    AuthModule,
+    // ProductsModule,
     UserModule,
-    OrderModule,
-    ServiceModule,
+    // OrderModule,
+    // ServiceModule,
   ],
   controllers: [],
   providers: [],
