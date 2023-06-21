@@ -3,9 +3,6 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import { ConfigModule } from '@nestjs/config';
 import { google } from 'googleapis';
 import { MailService } from './mailer.service';
-import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
-import { join } from 'path';
-import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
