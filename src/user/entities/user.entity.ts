@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { ResetPassword } from 'src/auth/entities/auth.entity';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class User {
@@ -7,6 +14,9 @@ export class User {
 
   @Column()
   fullName: string;
+
+  @Column()
+  username: string;
 
   @Column()
   email: string;
@@ -49,4 +59,7 @@ export class User {
 
   @Column({ default: null })
   postalCode: number;
+
+  @OneToMany(() => ResetPassword, (ResetPassword) => ResetPassword.user)
+  resetPassword: ResetPassword[];
 }
