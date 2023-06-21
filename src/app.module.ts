@@ -12,6 +12,7 @@ import { User } from './user/entities/user.entity';
 import { Product } from './products/entities/product.entity';
 import { ProductImage } from './products/entities/product-image.entity';
 import { ResetPassword } from './auth/entities/auth.entity';
+import { MailModule } from './mailer/mailer.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { ResetPassword } from './auth/entities/auth.entity';
       synchronize: true,
     }),
     AuthModule,
+    MailModule,
     ProductsModule,
     UserModule,
     // OrderModule,
