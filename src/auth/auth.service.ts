@@ -30,8 +30,8 @@ export class AuthService {
     @InjectRepository(ResetPassword)
     private resetPasswordModel: Repository<ResetPassword>,
     private jwtService: JwtService,
-  ) // private mailerService: MailService,
-  {}
+    private mailerService: MailService,
+  ) {}
 
   create(createAuthDto: CreateAuthDto) {
     return 'This action adds a new auth';
@@ -128,14 +128,12 @@ export class AuthService {
         token: `Gs${uuidv4()}${isUser.username}`,
         user: isUser,
       };
-      console.log(resetPasswordFields);
-
-      // await this.resetPasswordModel.save(resetPasswordFields);
-      // const response = await this.mailerService.SendResetPasswordMail(
-      //   email,
-      //   resetPasswordFields,
-      // );
-      // return { status: 200, message: 'Reset Password page' };
+      await this.resetPasswordModel.save(resetPasswordFields);
+      const response = await this.mailerService.SendResetPasswordMail(
+        email,
+        resetPasswordFields,
+      );
+      return { status: 200, message: 'Reset Password page' };
     } catch (error) {
       throw new BadRequestException(error.message);
     }
