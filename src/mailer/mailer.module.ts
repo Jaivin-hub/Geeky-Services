@@ -21,13 +21,6 @@ import { MailService } from './mailer.service';
           accessToken: nodemailer(),
         },
       },
-      // template: {
-      //   dir: join(__dirname, 'templates'),
-      //   adapter: new HandlebarsAdapter(),
-      //   options: {
-      //     strict: true,
-      //   },
-      // },
     }),
   ],
   providers: [MailService],
@@ -47,5 +40,6 @@ async function nodemailer() {
   );
   oauth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
   const token = await oauth2Client.getAccessToken();
+  console.log(token)
   return token;
 }
