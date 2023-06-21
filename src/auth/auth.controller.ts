@@ -37,8 +37,9 @@ export class AuthController {
     return this.authService.adminLOgin(loginAuthDto);
   }
 
-  @ApiTags('Register')
   @Post('/register')
+  @ApiOperation({ summary: 'Register' })
+  @ApiBody({ type: RegisterAuthDto })
   UserRegister(@Body() registerAuthDto: RegisterAuthDto) {
     return this.authService.userRegsiter(registerAuthDto);
   }
