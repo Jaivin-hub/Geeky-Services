@@ -118,16 +118,15 @@ export class AuthService {
     try {
       const { email } = resetPassworddto;
       let resetPasswordFields = {};
-      if (resetPassworddto.role === 'user') {
-        const isUser = await this.userModel.findOne({ where: { email } });
-        if (!isUser) {
-          throw new NotFoundException('Email not registered');
-        }
-        resetPasswordFields = {
-          token: `Gs${uuidv4()}${isUser.username}`,
-          user: isUser,
-        };
+      const isUser = await this.userModel.findOne({ where: { email } });
+      if (!isUser) {
+        throw new NotFoundException('Email not registered');
       }
+      resetPasswordFields = {
+        token: `Gs${uuidv4()}${isUser.username}`,
+        user: isUser,
+      };
+
       await this.resetPasswordModel.save(resetPasswordFields);
       const response = await this.mailerService.SendResetPasswordMail(
         email,

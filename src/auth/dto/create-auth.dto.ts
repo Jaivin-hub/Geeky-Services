@@ -49,9 +49,4 @@ export class ResetPasswordAuthDto {
   @IsNotEmpty()
   @ApiProperty({ type: String })
   email: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty({ type: String, example: 'Admin/user/customer' })
-  role: string;
 }
