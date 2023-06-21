@@ -40,6 +40,5 @@ async function nodemailer() {
   );
   oauth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
   const token = await oauth2Client.getAccessToken();
-  console.log(token)
   return token;
 }
