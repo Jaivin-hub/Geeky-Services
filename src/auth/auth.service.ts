@@ -91,7 +91,7 @@ export class AuthService {
 
       // add Hash Password
       registerDto.password = hash;
-      registerDto.username = `${registerDto.fullName.slice(0, 4)}Gs${
+      registerDto.username = `${registerDto.fullName.slice(0, 4)}-uGs${
         count + 1
       }`;
 
@@ -128,13 +128,14 @@ export class AuthService {
         token: `Gs${uuidv4()}${isUser.username}`,
         user: isUser,
       };
+      console.log(resetPasswordFields);
 
-      await this.resetPasswordModel.save(resetPasswordFields);
-      const response = await this.mailerService.SendResetPasswordMail(
-        email,
-        resetPasswordFields,
-      );
-      return { status: 200, message: 'Reset Password page' };
+      // await this.resetPasswordModel.save(resetPasswordFields);
+      // const response = await this.mailerService.SendResetPasswordMail(
+      //   email,
+      //   resetPasswordFields,
+      // );
+      // return { status: 200, message: 'Reset Password page' };
     } catch (error) {
       throw new BadRequestException(error.message);
     }
