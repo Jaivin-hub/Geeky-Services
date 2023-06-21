@@ -30,8 +30,8 @@ export class AuthService {
     @InjectRepository(ResetPassword)
     private resetPasswordModel: Repository<ResetPassword>,
     private jwtService: JwtService,
-    private mailerService: MailService,
-  ) {}
+  ) // private mailerService: MailService,
+  {}
 
   create(createAuthDto: CreateAuthDto) {
     return 'This action adds a new auth';

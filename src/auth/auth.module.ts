@@ -17,7 +17,7 @@ import { Customer } from 'src/customer/entities/customer.entity';
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '30d' },
     }),
-    MailModule,
+    // MailModule,
   ],
   controllers: [AuthController],
   providers: [AuthService],
