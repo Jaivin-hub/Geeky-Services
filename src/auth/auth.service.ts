@@ -91,7 +91,7 @@ export class AuthService {
 
       // add Hash Password
       registerDto.password = hash;
-      registerDto.username = `${registerDto.fullName.slice(0, 4)}-uGs${
+      registerDto.username = `${registerDto.fullName.slice(0, 4)}uGs${
         count + 1
       }`;
 
