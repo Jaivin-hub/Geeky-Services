@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { ProductImage } from './product-image.entity';
 
 @Entity()
 export class Product {
@@ -9,13 +16,16 @@ export class Product {
   product_name: string;
 
   @Column()
+  product_description: string;
+
+  @Column()
   category: string;
 
   @Column()
-  subCategory: string;
+  sub_Category: string;
 
   @Column()
-  price: number;
+  amount: number;
 
   @Column({ nullable: true })
   discount: number;
@@ -26,6 +36,6 @@ export class Product {
   @Column({ default: true })
   status: Boolean;
 
-  @Column()
-  images: [];
+  @OneToMany(() => ProductImage, (ProductImage) => ProductImage.product)
+  images: ProductImage[];
 }

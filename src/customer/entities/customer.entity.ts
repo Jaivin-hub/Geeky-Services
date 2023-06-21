@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { ResetPassword } from 'src/auth/entities/auth.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Customer {
@@ -17,7 +18,7 @@ export class Customer {
   @Column({ nullable: true })
   address: string;
 
-  @Column({ nullable: true })
+  @Column()
   role: string;
 
   @Column({ nullable: true })
@@ -49,4 +50,7 @@ export class Customer {
 
   @Column({ nullable: true })
   postalCode: number;
+
+  @OneToMany(() => ResetPassword, (ResetPassword) => ResetPassword.customer)
+  resetPassword: ResetPassword[];
 }

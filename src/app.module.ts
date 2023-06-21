@@ -9,6 +9,9 @@ import { OrderModule } from './order/order.module';
 import { ServiceModule } from './service/service.module';
 import { AuthModule } from './auth/auth.module';
 import { User } from './user/entities/user.entity';
+import { Product } from './products/entities/product.entity';
+import { ProductImage } from './products/entities/product-image.entity';
+import { ResetPassword } from './auth/entities/auth.entity';
 
 @Module({
   imports: [
@@ -20,11 +23,11 @@ import { User } from './user/entities/user.entity';
       username: 'sql12626876',
       password: 'ltQF8taPKq',
       database: 'sql12626876',
-      entities: [User, Customer],
+      entities: [User, Customer, Product, ProductImage, ResetPassword],
       synchronize: true,
     }),
     AuthModule,
-    // ProductsModule,
+    ProductsModule,
     UserModule,
     // OrderModule,
     // ServiceModule,
