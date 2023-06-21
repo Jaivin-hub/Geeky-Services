@@ -20,11 +20,13 @@ import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { ResetPassword } from './entities/auth.entity';
 import { MailService } from 'src/mailer/mailer.service';
+import { Customer } from 'src/customer/entities/customer.entity';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(User) private userModel: Repository<User>,
+    @InjectRepository(Customer) private customerModel: Repository<Customer>,
     @InjectRepository(ResetPassword)
     private resetPasswordModel: Repository<ResetPassword>,
     private jwtService: JwtService,

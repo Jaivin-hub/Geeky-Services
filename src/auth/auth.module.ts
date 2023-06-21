@@ -7,10 +7,11 @@ import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './utils/constants';
 import { ResetPassword } from './entities/auth.entity';
 import { MailModule } from 'src/mailer/mailer.module';
+import { Customer } from 'src/customer/entities/customer.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User, ResetPassword]),
+    TypeOrmModule.forFeature([User, ResetPassword, Customer]),
     JwtModule.register({
       global: true,
       secret: jwtConstants.secret,
