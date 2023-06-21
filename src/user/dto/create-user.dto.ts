@@ -34,4 +34,6 @@ export class CreateUserDto {
   @IsNotEmpty()
   @ApiProperty({ type: String, example: 'user/admin' })
   role: string;
+
+  username: string;
 }
